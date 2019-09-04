@@ -1,5 +1,6 @@
 library wheel_spinner;
 
+import 'package:ad_store_app/ad/ad_read.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 
@@ -116,7 +117,9 @@ class _UserCreateTargetState extends State<UserCreateTarget> {
               ),
               RaisedButton(
                 child: Text('저장'),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => AdRead()));},
               ),
             ],
           )
