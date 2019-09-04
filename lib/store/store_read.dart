@@ -9,7 +9,7 @@ class _StoreReadState extends State<StoreRead> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ,
+      body: Container(),
     );
   }
 }
