@@ -1,8 +1,8 @@
 class Store {
-  int storeUserId;
+  String storeUserId;
   double lat,lng;
   String name;
-  bool like;
+  int like;
 
 
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ad_store_app/ad/ad_create_discount.dart';
 import 'package:ad_store_app/ad/ad_read.dart';
 import 'package:ad_store_app/store/store_read.dart';
 import 'package:flutter/material.dart';
@@ -8,27 +9,36 @@ import 'package:image_picker/image_picker.dart';
 import 'menu_items.dart';
 
 class UserAppBar extends StatefulWidget {
+  final String page;
+  UserAppBar(this.page);
+
   @override
-  _UserAppBarState createState() => _UserAppBarState();
+  _UserAppBarState createState() => _UserAppBarState(this.page);
 }
 
 class _UserAppBarState extends State<UserAppBar> {
-  File _image;
+  _UserAppBarState(this.page);
+  String page;
+  File image;
 
   String userName= "사용자";
 
   Future getGalleryImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _image = image;
+      image = image;
     });
   }
 
   Future getCameraImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
-      _image = image;
+      image = image;
     });
+  }
+  void _to_Discount(){
+    Navigator.pushNamed(context, AdCreateDiscount.routeName1);
+
   }
 
   @override
@@ -43,6 +53,11 @@ class _UserAppBarState extends State<UserAppBar> {
       }
     }
 
+    void navigator() {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => AdRead()));
+    }
+
     return Column(
       children: <Widget>[
         Card(
@@ -54,14 +69,14 @@ class _UserAppBarState extends State<UserAppBar> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                    width: 90,
+                    width: 60,
                     height: 60,
                     child: FlatButton(
-                      child: _image == null? Image.asset("assets/user.png"): Image.file(_image),
+                      child: image == null? Image.asset("assets/user.png"): Image.file(image),
                       onPressed: getGalleryImage,
                     )),
                 Container(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: EdgeInsets.only(left: 0),
                     child: FlatButton(
                       child: Text(
                         '$userName',
@@ -75,19 +90,27 @@ class _UserAppBarState extends State<UserAppBar> {
                             .push(MaterialPageRoute(builder: (context) => StoreRead()));
                       },
                     )),
-                Container(
-                  margin: EdgeInsets.only(left: 150),
-                  child: PopupMenuButton<String>(
-                      onSelected: choiceAction,
-                      itemBuilder: (context) {
-                        return MenuItems.choice.map((String choice) {
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(choice),
-                          );
-                        }).toList();
-                      }),
-                ),
+
+
+            page=="광고"? Container(
+                  margin: EdgeInsets.only(left: 100),
+                  child:
+                      IconButton(icon: Icon(Icons.add),onPressed: _to_Discount,))
+                      :
+            Container(
+              margin: EdgeInsets.only(left: 0),
+              child:FlatButton(child: Text('광고 관리하기', style: TextStyle(fontSize: 12),), onPressed: navigator,),)
+//                  PopupMenuButton<String>(
+//                      onSelected: choiceAction,
+//                      itemBuilder: (context) {
+//                        return MenuItems.choice.map((String choice) {
+//                          return PopupMenuItem<String>(
+//                            value: choice,
+//                            child: Text(choice),
+//                          );
+//                        }).toList();
+//                      }),
+
               ],
             ),
           ),

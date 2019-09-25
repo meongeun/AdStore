@@ -1,12 +1,11 @@
 class StoreUser{
-  String email, phone, pw, target, image;
+  String email, phone, target, image;
   int age, storeId, adId;
   bool gender;
 
   StoreUser.fromJson(Map map) {
     this.email = map['email'];
     this.phone = map['phone'];
-    this.pw = map['pw'];
     this.target = map['target'];
     this.image = map['image'];
 

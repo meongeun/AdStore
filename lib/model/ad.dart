@@ -1,6 +1,6 @@
 class Ad {
-  String kind, name, menu, repeat;
-  int price, startDiscount, timeGap, discountGap, startNum, plusOne, plusTwo, storeId, storeUserId;
+  String kind, name, repeat;
+  int price, startDiscount, timeGap, discountGap, downNum, plusOne, plusTwo, storeId, storeUserId;
   DateTime startTime, endTime, startDay, endDay;
   bool full;
 
@@ -8,14 +8,13 @@ class Ad {
   Ad.fromJson(Map map) {
   this.kind = map['kind'];
   this.name = map['name'];
-  this.menu = map['menu'];
   this.repeat = map['repeat'];
 
   this.price = map['price'];
   this.startDiscount = map['startdiscount'];
   this.timeGap = map['timegap'];
   this.discountGap = map['discountgap'];
-  this.startNum = map['startnum'];
+  this.downNum = map['downnum'];    //서버에서 고치기
   this.plusOne = map['plusone'];
   this.plusTwo = map['plustwo'];
   this.storeId = map['store_id'];
